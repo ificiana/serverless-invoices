@@ -1,5 +1,5 @@
-# docker build . -t mokuappio/serverless-invoices
-# docker run -p 80:8080 -d mokuappio/serverless-invoices
+# docker build . -t ificiana/serverless-invoices
+# docker run -p 80:8080 -d ificiana/serverless-invoices
 
 FROM node:16
 

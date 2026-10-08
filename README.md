@@ -1,6 +1,4 @@
-<a href="https://www.producthunt.com/posts/serverless-invoices?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-serverless-invoices" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=287626&theme=light&period=daily" alt="Serverless Invoices - Open source, serverless invoice generator | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-# Serverless Invoices by Moku
+# Serverless Invoices
 
 Serverless Invoices is a free invoicing tool for freelancers and small businesses.
 
@@ -74,16 +72,16 @@ npm run lint
 It is necessary to install Docker before running the following commands.
 
 ```
-git clone https://github.com/mokuappio/serverless-invoices.git
+git clone https://github.com/ificiana/serverless-invoices.git
 cd serverless-invoices.git
-docker build . -t mokuappio/serverless-invoices
-docker run -p 80:8080 -d --rm mokuappio/serverless-invoices
+docker build . -t ificiana/serverless-invoices
+docker run -p 80:8080 -d --rm ificiana/serverless-invoices
 ```
 
 It is possible to add an alias in your .bashrc/.zshrc file to launch the app on the fly.
 
 ```
-echo "alias serverless-invoices='docker run -p 80:8080 -d --rm mokuappio/serverless-invoices'" >> ~/.zshrc
+echo "alias serverless-invoices='docker run -p 80:8080 -d --rm ificiana/serverless-invoices'" >> ~/.zshrc
 source ~/.zshrc
 serverless-invoices
 ```
@@ -94,18 +92,6 @@ serverless-invoices
 - invoice maker
 - invoice generator 
 
+## Credits
 
-## Affiliates and sponsors
-<a href="https://www.zone.ee/en/" target="_blank"><img src="https://www.zone.ee/wp-content/themes/zone-theme/img/zone_ee.svg" alt="Zone - Domains and web hosting" width="150"/></a>
-
-**ZONE** offers fast and secure web hosting, spam free email, cheap domains and quality support.
-
-Get **50%** off your first year with the code **ELEVATE**
- - [Get your web, email and domain](https://my.zone.eu/en/domain-search#/?campaign=ELEVATE)
- - Already have a domain? [Get only web and email](https://my.zone.eu/en/zwebadmin/webhosting/order?campaign=ELEVATE)
-
-<a href="https://mokuapp.io/" target="_blank"><img src="https://user-images.githubusercontent.com/5262399/170223530-0634d5c4-56d8-425e-846c-09f352f7b00c.png" alt="Moku - Time tracking, task management and automated invoicing" width="150"/></a>
-
-**MOKU** offers simple time tracking, task management and automated invoicing for ambitious dev teams and freelancers.
- - [Get your free trial](https://mokuapp.io/)
-
+Originally created by [Moku](https://github.com/mokuappio/serverless-invoices). Maintained by [Ificiana](https://ificiana.github.io/). Released under the MIT license.
