@@ -1,4 +1,5 @@
-import app from '../main';
+import { i18next } from '@/config/i18n.config';
+import router from '@/router';
 
 export default {
   namespaced: true,
@@ -25,8 +26,8 @@ export default {
   },
   actions: {
     changeLanguage({ commit }, lang) {
-      app.$i18n.i18next.changeLanguage(lang.code);
-      app.$router.push({ query: { ...app.$route.query, lang: lang.code } });
+      i18next.changeLanguage(lang.code);
+      router.push({ query: { ...router.currentRoute.value.query, lang: lang.code } });
       commit('lang', lang);
     },
     initLanguage({ commit, state }, code) {

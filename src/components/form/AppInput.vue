@@ -30,6 +30,7 @@
 import AppError from '@/components/form/AppError';
 
 export default {
+  emits: ['change', 'input', 'submit'],
   components: {
     AppError,
   },

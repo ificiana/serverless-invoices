@@ -10,13 +10,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { BModal } from 'bootstrap-vue';
 import TeamForm from '@/components/team/TeamForm';
 
 export default {
   components: {
     TeamForm,
-    BModal,
   },
   computed: {
     isOpen: {

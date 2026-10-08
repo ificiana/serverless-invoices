@@ -27,20 +27,16 @@
     </div>
 </template>
 <script>
-import { BModal, VBModal } from 'bootstrap-vue';
 import BankAccountsList from '@/components/bank-accounts/BankAccountsList';
 import AppEditable from '@/components/form/AppEditable';
 
 export default {
+  emits: ['update'],
   i18nOptions: { namespaces: 'invoice-bank-details' },
   props: ['invoice', 'errors'],
   components: {
     AppEditable,
-    BModal,
     BankAccountsList,
-  },
-  directives: {
-    'b-modal': VBModal,
   },
   methods: {
     accountSelected(account) {

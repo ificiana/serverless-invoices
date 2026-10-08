@@ -12,6 +12,7 @@
 import { uuidv4 } from '@/utils/helpers';
 
 export default {
+  emits: ['selected'],
   props: {
     buttonText: {
       default: 'Select file',

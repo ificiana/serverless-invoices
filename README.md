@@ -2,8 +2,7 @@
 
 Serverless Invoices is a free invoicing tool for freelancers and small businesses.
 
-It is open-source and easily extendable. You can use it as a starter kit for more complex systems. Implement your own features, localization, styling
- or integrate with various other systems and API-s.
+It is open-source and runs entirely in your browser.
  
 Run it locally or host it yourself.
  
@@ -32,39 +31,27 @@ Built with [Vue.js](https://vuejs.org/) and [Bootstrap](https://getbootstrap.com
 - Dark and light mode!
 - Multilingual
 - PWA support 
-- Ready-to-go backend adapters
-  - [Browser Storage](https://invoices.elevate.ee)
-  - [Wordpress](https://wordpress.org/plugins/beautiful-custom-invoices/)
-  - Woocommerce (coming soon)
-  - Google Drive (coming soon)
-  - Custom HTTP API
 
 ## Project setup
-Requires `node 16.18`
+Requires a current Node LTS and [pnpm](https://pnpm.io)
 
 ```
-npm install
-```
-
-### Create app config
-Create an app.config.js which can be edited for custom settings.
-```
-cp src/config/app.config.example.js src/config/app.config.js
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+pnpm dev
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+pnpm build
 ```
 
-### Lints and fixes files
+### Lints files
 ```
-npm run lint
+pnpm lint
 ```
 
 ## Run with Docker

@@ -1,7 +1,6 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 import VuexORM from '@vuex-orm/core';
-import VuexORMisDirtyPlugin from '@vuex-orm/plugin-change-flags';
+import changeFlags from '@vuex-orm/plugin-change-flags';
 import BankAccount from '@/store/models/bank-account';
 import Client from '@/store/models/client';
 import Invoice from '@/store/models/invoice';
@@ -27,9 +26,8 @@ import InvoiceTeamField from '@/store/models/invoice-team-field';
 import Tax from '@/store/models/tax';
 import InvoiceRowTax from '@/store/models/invoice-row-tax';
 
-Vue.use(Vuex);
-
-VuexORM.use(VuexORMisDirtyPlugin);
+// The UMD bundle's default export is wrapped differently by dev and build interop.
+VuexORM.use(changeFlags.default || changeFlags);
 const database = new VuexORM.Database();
 
 database.register(Tax);
@@ -44,7 +42,7 @@ database.register(InvoiceRow);
 database.register(InvoiceRowTax);
 database.register(BankAccount);
 
-export default new Vuex.Store({
+export default createStore({
   plugins: [VuexORM.install(database)],
   modules: {
     bankAccounts,

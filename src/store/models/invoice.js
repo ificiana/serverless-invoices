@@ -53,21 +53,21 @@ export default class Invoice extends Model {
     return this.rows.reduce((carr, row) => (row.quantity * row.price) + carr, 0);
   }
 
-  // eslint-disable-next-line no-empty-function
+   
   set subTotal(val) {}
 
   get total() {
     return this.subTotal + this.taxTotal;
   }
 
-  // eslint-disable-next-line no-empty-function
+   
   set total(val) {}
 
   get taxTotal() {
     return Object.values(this.taxes).reduce((carr, tax) => (tax.total + carr), 0);
   }
 
-  // eslint-disable-next-line no-empty-function
+   
   set taxTotal(val) {}
 
   get taxes() {
@@ -87,6 +87,6 @@ export default class Invoice extends Model {
     return taxes;
   }
 
-  // eslint-disable-next-line no-empty-function
+   
   set taxes(val) {}
 }

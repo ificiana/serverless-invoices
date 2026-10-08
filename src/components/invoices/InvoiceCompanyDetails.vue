@@ -50,6 +50,7 @@ import InvoiceTeamFields from '@/components/invoices/InvoiceTeamFields';
 import AppEditable from '../form/AppEditable';
 
 export default {
+  emits: ['update'],
   i18nOptions: { namespaces: 'invoice-company-details' },
   props: ['invoice', 'errors'],
   components: {

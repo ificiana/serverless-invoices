@@ -6,7 +6,7 @@
                 <div v-if="client">
                     <div v-if="!isNew">
                         <b-dropdown variant="link" size="sm" no-caret right>
-                            <template slot="button-content">
+                            <template #button-content>
                                 <i class="material-icons">more_vert</i>
                             </template>
                             <b-dropdown-item-button @click="deleteClient">{{ $t('delete') }}</b-dropdown-item-button>
@@ -82,9 +82,6 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import {
-  BTab, BTabs, BDropdownItemButton, BDropdown,
-} from 'bootstrap-vue';
 import NotificationService from '@/services/notification.service';
 import AppInput from '@/components/form/AppInput';
 import AppSelect from '@/components/form/AppSelect';
@@ -93,16 +90,13 @@ import AppCheckbox from '@/components/form/AppCheckbox';
 import ClientFields from '@/components/clients/ClientFields';
 
 export default {
+  emits: ['done'],
   i18nOptions: { namespaces: 'client-form' },
   components: {
     ClientFields,
     AppCheckbox,
     AppInput,
     AppSelect,
-    BTab,
-    BTabs,
-    BDropdown,
-    BDropdownItemButton,
   },
   data() {
     return {

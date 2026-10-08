@@ -12,8 +12,7 @@
         <div class="col-md-8 text-left text-md-right">
             <small v-b-tooltip.hover
                    :title="$t('title')"
-                   class="pointer"
-                   v-if="!isStorageWordpress">
+                   class="pointer">
                 {{ $t('what_about_my_data') }}
             </small>
             <small class="pl-2">
@@ -26,8 +25,7 @@
             </small>
             <a href="https://github.com/ificiana/serverless-invoices"
                class="btn btn-sm btn--icon ml-0 ml-md-2"
-               target="_blank"
-               v-if="!isStorageWordpress">
+               target="_blank">
                 <img src="@/assets/img/github.png"
                      alt="Serverless Invoices Github"
                      v-if="theme === 'dark'">
@@ -40,24 +38,16 @@
 </template>
 
 <script>
-import config from '@/config/app.config';
 import { mapState } from 'vuex';
-import { VBTooltip } from 'bootstrap-vue';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default {
   i18nOptions: { namespaces: 'the-footer' },
   components: { LanguageSwitcher },
-  directives: {
-    'b-tooltip': VBTooltip,
-  },
   computed: {
     ...mapState({
       theme: state => state.themes.theme,
     }),
-    isStorageWordpress() {
-      return config.storageType === 'wordpress';
-    },
   },
   methods: {
     toggleTheme() {

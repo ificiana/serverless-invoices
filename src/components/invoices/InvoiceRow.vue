@@ -22,7 +22,7 @@
                          @change="updateProp({ unit: $event })"/>
         </td>
         <td>
-            <AppEditable :value="row.price | currency"
+            <AppEditable :value="$currency(row.price)"
                          :errors="errors"
                          :field="`rows.${index}.price`"
                          :placeholder="$t('enter_price')"
@@ -30,14 +30,14 @@
         </td>
         <td v-for="(tax, taxIndex) in row.taxes" :title="tax.label">
             <AppEditable v-if="tax.row_id"
-                         :value="tax.value | currency"
+                         :value="$currency(tax.value)"
                          :errors="errors"
                          :field="`rows.${index}.taxes.${taxIndex}.value`"
                          :placeholder="$t('enter_tax')"
                          @change="updateTaxProp({ value: $event }, tax)"/>
         </td>
         <td class="text-right position-relative">
-            {{ (row.quantity * row.price) | currency }}
+            {{ $currency(row.quantity * row.price) }}
             <button class="btn btn-sm d-print-none invoice__row-control"
                     @click="removeRow(row)">
                 <i class="material-icons md-18 pointer">remove</i>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import { formatCurrency } from '../../filters/currency.filter';
 import AppEditable from '../form/AppEditable';
 
 export default {
@@ -56,9 +55,6 @@ export default {
   i18nOptions: { namespaces: 'invoice-row' },
   components: {
     AppEditable,
-  },
-  filters: {
-    currency: formatCurrency,
   },
   methods: {
     updateProp(props) {

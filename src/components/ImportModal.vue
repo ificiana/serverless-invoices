@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { BModal } from 'bootstrap-vue';
 import AppFileInput from './form/AppFileInput';
 import Errors from '../utils/errors';
 import AppError from './form/AppError';
@@ -26,7 +25,6 @@ export default {
   components: {
     AppError,
     AppFileInput,
-    BModal,
   },
   data() {
     return {
@@ -53,7 +51,7 @@ export default {
 
         this.$store.dispatch('data/importJson', data);
         this.close();
-      } catch (e) {
+      } catch {
         return this.errors.set({
           file: [this.$t('on-select-error')],
         });

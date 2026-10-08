@@ -22,6 +22,7 @@
 import AppError from '@/components/form/AppError';
 
 export default {
+  emits: ['change', 'input'],
   props: {
     value: {
       type: String,
@@ -50,11 +51,9 @@ export default {
   computed: {
     listeners() {
       return {
-        ...this.$listeners,
         input: this.onInput,
         focusin: this.onFocusIn,
         focusout: this.onFocusOut,
-        isFocused: false,
       };
     },
   },

@@ -21,6 +21,7 @@ import AppEditable from '@/components/form/AppEditable';
 import { mapGetters } from 'vuex';
 
 export default {
+  emits: ['changed'],
   i18nOptions: { namespaces: 'team-taxes' },
   components: {
     AppEditable,

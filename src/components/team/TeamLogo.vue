@@ -30,7 +30,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import AppError from '@/components/form/AppError';
-import { BModal } from 'bootstrap-vue';
 import AppInput from '@/components/form/AppInput';
 import AppFileInput from '@/components/form/AppFileInput';
 
@@ -41,7 +40,6 @@ export default {
     AppFileInput,
     AppError,
     AppInput,
-    BModal,
   },
   data() {
     return {

@@ -23,6 +23,7 @@
 import AppEditable from '../form/AppEditable';
 
 export default {
+  emits: ['update'],
   i18nOptions: { namespaces: 'invoice-contact-details' },
   props: ['invoice', 'errors'],
   components: {

@@ -17,7 +17,7 @@
                         @click="bookInvoice">{{ $t('book') }}
                 </button>
                 <b-dropdown variant="link" no-caret right>
-                    <template slot="button-content">
+                    <template #button-content>
                         <i class="material-icons">more_vert</i>
                     </template>
                     <b-dropdown-group :header="$t('design_and_layout')">
@@ -40,12 +40,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import NotificationService from '@/services/notification.service';
-import {
-  BDropdown,
-  BDropdownDivider,
-  BDropdownGroup,
-  BDropdownItemButton,
-} from 'bootstrap-vue';
 import AppSelect from '@/components/form/AppSelect';
 
 export default {
@@ -53,10 +47,6 @@ export default {
     namespaces: ['invoice-controls', 'statuses'],
   },
   components: {
-    BDropdown,
-    BDropdownDivider,
-    BDropdownItemButton,
-    BDropdownGroup,
 
     AppSelect,
   },

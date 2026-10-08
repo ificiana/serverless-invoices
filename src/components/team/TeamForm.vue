@@ -84,9 +84,6 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import {
-  BTab, BTabs,
-} from 'bootstrap-vue';
 import NotificationService from '@/services/notification.service';
 import AppInput from '@/components/form/AppInput';
 import Errors from '@/utils/errors';
@@ -95,14 +92,13 @@ import TeamLogo from '@/components/team/TeamLogo';
 import TeamTaxes from '@/components/team/TeamTaxes';
 
 export default {
+  emits: ['done'],
   i18nOptions: { namespaces: 'team-form' },
   components: {
     TeamLogo,
     TeamFields,
     TeamTaxes,
     AppInput,
-    BTab,
-    BTabs,
   },
   data() {
     return {

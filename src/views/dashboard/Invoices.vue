@@ -5,11 +5,10 @@
                 <h4 class="mb-0">{{ $t('title') }}</h4>
                 <div>
                     <button class="btn btn-sm btn-outline-dark"
-                            :class="{ 'mr-3': !isStorageLocal }"
                             @click="createNewInvoice">{{ $t('new_invoice') }}
                     </button>
-                    <b-dropdown variant="link" size="sm" no-caret right v-if="isStorageLocal">
-                        <template slot="button-content">
+                    <b-dropdown variant="link" size="sm" no-caret right>
+                        <template #button-content>
                             <i class="material-icons">more_vert</i>
                         </template>
                         <b-dropdown-item @click="exportJson">{{ $t('export') }}</b-dropdown-item>
@@ -27,26 +26,19 @@
 </template>
 
 <script>
-import { BDropdown, BDropdownItem } from 'bootstrap-vue';
 import { mapGetters } from 'vuex';
 import InvoicesList from '@/components/invoices/InvoicesList';
-import config from '@/config/app.config';
 
 export default {
   name: 'invoices',
   i18nOptions: { namespaces: 'invoices' },
   components: {
     InvoicesList,
-    BDropdown,
-    BDropdownItem,
   },
   computed: {
     ...mapGetters({
       team: 'teams/team',
     }),
-    isStorageLocal() {
-      return config.storageType === 'local';
-    },
   },
   methods: {
     createNewInvoice() {

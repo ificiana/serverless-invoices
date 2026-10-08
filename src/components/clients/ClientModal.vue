@@ -10,13 +10,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { BModal } from 'bootstrap-vue';
 import ClientForm from '@/components/clients/ClientForm';
 
 export default {
   components: {
     ClientForm,
-    BModal,
   },
   computed: {
     isOpen: {

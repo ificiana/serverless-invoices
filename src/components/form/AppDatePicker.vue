@@ -8,25 +8,21 @@
                  <i class="material-icons md-18 text-muted" v-else>calendar_today</i>
                </span>
              </div>-->
-            <DatePicker :disabled="disabled"
+            <VueDatePicker :disabled="disabled"
                         :inline="inline"
-                        :id="field"
-                        :class="[
+                        :uid="field"
+                        :input-class-name="[
                             errors && errors.has(field) ? 'is-invalid' : '',
-                            ...inputClasses,
-                            ]"
+                            ...(inputClasses || []),
+                            ].join(' ')"
                         :placeholder="placeholder"
-                        autocomplete="off"
-                        @change="outputValue"
-                        :lang="{
-                            formatLocale: {
-                                firstDayOfWeek: 1,
-                            },
-                        }"
+                        auto-apply
+                        :enable-time-picker="false"
+                        :week-start="1"
                         :range="mode === 'range'"
-                        :format="format"
-                        :type="type"
-                        :value="inputValue"/>
+                        :format="formatDate"
+                        :model-value="inputValue"
+                        @update:model-value="outputValue"/>
             <slot></slot>
             <AppError v-if="errors" :errors="errors" :field="field"/>
         </div>
@@ -35,13 +31,15 @@
 
 <script>
 import dayjs from 'dayjs';
-import DatePicker from 'vue2-datepicker';
+import { VueDatePicker } from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 import AppError from '@/components/form/AppError';
 
 export default {
+  emits: ['change', 'input'],
   components: {
     AppError,
-    DatePicker,
+    VueDatePicker,
   },
   props: {
     errors: {},
@@ -59,7 +57,6 @@ export default {
     modelFormat: {
       default: 'YYYY-MM-DD',
     },
-    type: {},
     placeholder: {},
     labelClasses: {},
     inputClasses: {},
@@ -67,16 +64,24 @@ export default {
   },
   computed: {
     inputValue() {
+      if (!this.value) return null;
       return Array.isArray(this.value)
         ? this.value.map(val => dayjs(val, this.modelFormat).toDate())
         : dayjs(this.value, this.modelFormat).toDate();
     },
   },
   methods: {
+    formatDate(date) {
+      return Array.isArray(date)
+        ? date.map(d => dayjs(d).format(this.format)).join(' - ')
+        : dayjs(date).format(this.format);
+    },
     outputValue(event) {
       const value = Array.isArray(event)
         ? event.map(val => this.toModelFormat(val))
         : this.toModelFormat(event);
+      // The picker re-emits whenever its prop gets a new Date instance; ignore unchanged values.
+      if (JSON.stringify(value) === JSON.stringify(this.value)) return;
       this.$emit('input', value);
       this.$emit('change', value);
     },
@@ -87,11 +92,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.mx-datepicker-popup {
-  z-index: 1040;
-}
-
-.mx-datepicker {
-  width: 100%;
-}
 </style>

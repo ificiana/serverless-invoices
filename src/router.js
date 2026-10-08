@@ -1,20 +1,15 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '@/store/store';
-import i18n from '@/config/i18n.config';
-import config from '@/config/app.config';
-
-Vue.use(Router);
+import { i18next, initialized } from '@/config/i18n.config';
 
 const routes = [
   {
     path: '/',
     name: 'dashboard',
-    redirect: 'invoices',
+    redirect: '/invoices',
     component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/Dashboard.vue'),
-    beforeEnter: async (to, from, next) => {
+    beforeEnter: async () => {
       await store.dispatch('teams/init');
-      next();
     },
     children: [
       {
@@ -36,20 +31,15 @@ const routes = [
   },
 ];
 
-const router = new Router({
-  mode: 'history',
-  base: config.base_url,
+const router = createRouter({
+  history: createWebHashHistory(),
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (!to.query.hasOwnProperty('lang')) {
-    i18n.initialized.then(() => {
-      to.query.lang = i18n.i18next.language;
-      next(to);
-    });
-  } else {
-    next();
+router.beforeEach(async (to) => {
+  if (!Object.prototype.hasOwnProperty.call(to.query, 'lang')) {
+    await initialized;
+    return { ...to, query: { ...to.query, lang: i18next.language } };
   }
 });
 

@@ -1,11 +1,9 @@
-import Vue from 'vue';
+import { reactive } from 'vue';
 import i18next from 'i18next';
-import VueI18Next from '@panter/vue-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import app from '@/main';
 
-Vue.use(VueI18Next);
+const state = reactive({ version: 0 });
 
 i18next
   .use(LanguageDetector)
@@ -13,23 +11,38 @@ i18next
 
 const initialized = i18next.init({
   fallbackLng: 'en',
-  whitelist: ['en', 'de', 'fr', 'et', 'fa', 'bn', 'es', 'pt_br', 'it', 'id', 'kr'],
+  supportedLngs: ['en', 'de', 'fr', 'et', 'fa', 'bn', 'es', 'pt_br', 'it', 'id', 'kr'],
+  nonExplicitSupportedLngs: false,
   backend: {
-    loadPath: `${window.location.origin}/locales/{{lng}}/{{ns}}.json`,
+    loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/{{ns}}.json`,
   },
   detection: {
     order: ['querystring', 'path', 'localStorage', 'navigator'],
     lookupQuerystring: 'lang',
     caches: ['localStorage'],
-    checkWhitelist: true,
   },
 });
-initialized.then(() => app.$store.dispatch('language/initLanguage', i18next.language));
 
-const i18n = new VueI18Next(i18next, {
-  // loadComponentNamespace: true,
+i18next.on('loaded languageChanged', () => {
+  state.version++;
 });
 
-i18n.initialized = initialized;
+// Gives every component `$t`, scoped to the namespaces in its `i18nOptions`.
+const plugin = {
+  install(app) {
+    app.mixin({
+      beforeCreate() {
+        const ns = this.$options.i18nOptions && this.$options.i18nOptions.namespaces;
+        if (ns) i18next.loadNamespaces(ns);
+      },
+    });
+    app.config.globalProperties.$t = function t(key, options) {
+      state.version;
+      const opts = this.$options.i18nOptions;
+      return i18next.t(key, { ns: opts && opts.namespaces, ...options });
+    };
+  },
+};
 
-export default i18n;
+export { i18next, initialized };
+export default plugin;

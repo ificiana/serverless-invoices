@@ -12,7 +12,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="account in bankAccounts" :key="account.id"
-                    @click="onSelect(account)" :class="{pointer: $listeners.select }">
+                    @click="onSelect(account)" :class="{pointer: $attrs.onSelect }">
                     <td>{{ account.bank_name }}</td>
                     <td>{{ account.account_no }}</td>
                     <td class="text-right">
@@ -35,16 +35,13 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import { formatDate } from '@/filters/date.filter';
 import EmptyState from '@/components/EmptyState';
 
 export default {
+  emits: ['select'],
   i18nOptions: { namespaces: 'bank-accounts-list' },
   components: {
     EmptyState,
-  },
-  filters: {
-    date: formatDate,
   },
   computed: {
     ...mapGetters({

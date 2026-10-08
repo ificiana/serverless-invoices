@@ -47,6 +47,7 @@ import AppTextarea from '@/components/form/AppTextarea';
 import Errors from '@/utils/errors';
 
 export default {
+  emits: ['done'],
   i18nOptions: { namespaces: 'bank-account-form' },
   components: {
     AppInput,

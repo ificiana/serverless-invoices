@@ -1,27 +1,24 @@
-import 'es6-promise';
-import VueProgressBar from 'vue-progressbar';
-import progressbarConfig from '@/config/progressbar.config';
+import { createApp } from 'vue';
+import Notifications from '@kyvg/vue3-notification';
 import '@/config/local-storage.config';
-import { ModalPlugin } from 'bootstrap-vue';
-import Vue from 'vue';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store/store';
-import VueNotifications from 'vue-notification';
+import i18n, { i18next, initialized } from '@/config/i18n.config';
+import ui from '@/components/ui';
+import { formatCurrency } from '@/filters/currency.filter';
+import { formatDate } from '@/filters/date.filter';
 import './registerServiceWorker';
-import i18n from './config/i18n.config';
 
-Vue.use(ModalPlugin);
-Vue.use(VueNotifications);
-Vue.use(VueProgressBar, progressbarConfig);
+const app = createApp(App);
 
-Vue.config.productionTip = false;
+app.config.globalProperties.$currency = formatCurrency;
+app.config.globalProperties.$date = formatDate;
 
-const app = new Vue({
-  router,
-  store,
-  i18n,
-  render: h => h(App),
-}).$mount('#app');
+app.use(router).use(store).use(i18n).use(Notifications)
+  .use(ui)
+  .mount('#app');
+
+initialized.then(() => store.dispatch('language/initLanguage', i18next.language));
 
 export default app;

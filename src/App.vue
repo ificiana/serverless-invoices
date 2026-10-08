@@ -2,10 +2,11 @@
     <div id="app"
          class="min-vh-100"
          :class="$route.name">
-        <vue-progress-bar/>
-        <transition name="fade" mode="out-in">
-            <router-view/>
-        </transition>
+        <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+                <component :is="Component"/>
+            </transition>
+        </router-view>
         <notifications position="bottom center" classes="snackbar" width="332"/>
     </div>
 </template>
@@ -52,6 +53,5 @@ export default {
 <style lang="scss">
 @import './assets/scss/variables';
 @import '../node_modules/bootstrap/scss/bootstrap';
-@import '../node_modules/bootstrap-vue/dist/bootstrap-vue.min.css';
 @import './assets/scss/app';
 </style>

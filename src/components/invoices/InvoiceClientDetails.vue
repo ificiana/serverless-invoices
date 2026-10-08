@@ -48,6 +48,7 @@ import ClientSelector from '@/components/clients/ClientSelector';
 import InvoiceClientFields from '@/components/invoices/InvoiceClientFields';
 
 export default {
+  emits: ['update'],
   i18nOptions: { namespaces: 'invoice-client-details' },
   props: ['invoice', 'errors'],
   components: {

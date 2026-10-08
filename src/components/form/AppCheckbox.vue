@@ -21,6 +21,7 @@
 import AppError from '@/components/form/AppError';
 
 export default {
+  emits: ['input'],
   components: {
     AppError,
   },

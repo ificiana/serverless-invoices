@@ -11,12 +11,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { BModal } from 'bootstrap-vue';
 import BankAccountForm from '@/components/bank-accounts/BankAccountForm';
 
 export default {
   components: {
-    BModal,
     BankAccountForm,
   },
   computed: {

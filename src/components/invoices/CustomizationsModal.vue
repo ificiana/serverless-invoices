@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { BModal } from 'bootstrap-vue';
 import AppTextarea from '@/components/form/AppTextarea';
 import Errors from '@/utils/errors';
 import NotificationService from '@/services/notification.service';
@@ -33,7 +32,6 @@ export default {
     };
   },
   components: {
-    BModal,
     AppTextarea,
   },
   computed: {
