@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown b-dropdown" :class="{ show: open }" ref="root">
+    <div class="dropdown b-dropdown btn-group" :class="{ show: open }" ref="root">
         <button type="button"
                 class="btn dropdown-toggle"
                 :class="[`btn-${variant}`, size ? `btn-${size}` : '', { 'dropdown-toggle-no-caret': noCaret }, customClass]"
